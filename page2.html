@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
 
-        <style>
+<head>
+    <meta charset="utf-8">
+
+    <style>
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
@@ -31,13 +32,16 @@
             stroke: black;
             stroke-width: 1.5;
         }
-        </style>
-    </head>
-    <body>
-        <div class="graph"></div>
+    </style>
+</head>
 
-        <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script>
+<body>
+    <div class="graph"></div>
+
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <!-- <script src="//d3js.org/d3.v4.min.js"></script> -->
+
+    <script>
         var limit = 60 * 1,
             duration = 750,
             now = new Date(Date.now() - duration)
@@ -49,21 +53,21 @@
             current: {
                 value: 0,
                 color: 'orange',
-                data: d3.range(limit).map(function() {
+                data: d3.range(limit).map(function () {
                     return 0
                 })
             },
             target: {
                 value: 0,
                 color: 'green',
-                data: d3.range(limit).map(function() {
+                data: d3.range(limit).map(function () {
                     return 0
                 })
             },
             output: {
                 value: 0,
                 color: 'grey',
-                data: d3.range(limit).map(function() {
+                data: d3.range(limit).map(function () {
                     return 0
                 })
             }
@@ -79,10 +83,10 @@
 
         var line = d3.svg.line()
             .interpolate('basis')
-            .x(function(d, i) {
+            .x(function (d, i) {
                 return x(now - (limit - 1 - i) * duration)
             })
-            .y(function(d) {
+            .y(function (d) {
                 return y(d)
             })
 
@@ -107,7 +111,7 @@
         }
 
         function tick() {
-        now = new Date()
+            now = new Date()
 
             // Add new values
             for (var name in groups) {
@@ -142,6 +146,8 @@
         }
 
         tick()
-        </script>
-    </body>
+    </script>
+</body>
+<a href="index.html">Home</a>
+
 </html>
