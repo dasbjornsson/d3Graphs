@@ -5,18 +5,23 @@
     <style>
         svg {
             font: 10px sans-serif;
+            background: black;                        
+        }
+
+        svg text {
+            fill: white;
         }
 
         .line {
             fill: none;
-            stroke: orange;
-            stroke-width: 1.5px;
+            stroke: rgb(255, 175, 70);
+            stroke-width: 2px;
         }
 
         .axis path,
         .axis line {
             fill: none;
-            stroke: #000;
+            stroke: rgb(255, 255, 255);
             shape-rendering: crispEdges;
         }
     </style>
@@ -26,14 +31,15 @@
 </head>
 
 <body>
-
+    <a href="index.html">Home</a>
+    <div id="myGraph"></div>
 </body>
-<a href="index.html">Home</a>
+
 
 </html>
 
 <script>
-    var n = 10,
+    var n = 100,
         duration = 1500,
         now = new Date(Date.now() - duration),
         random = d3.randomNormal(0, .2),
@@ -46,8 +52,8 @@
         bottom: 20,
         left: 40
     },
-        width = 500 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        width = 1200 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
 
     var x = d3.scaleTime()
         .domain([now - (n - 2) * duration, now - duration])
@@ -67,7 +73,7 @@
             return y(d);
         });
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#myGraph").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -96,7 +102,7 @@
 
 
     var transition = d3.select({}).transition()
-        .duration(750)
+        .duration(1000)
         .ease(d3.easeLinear)
         .on("start", tick);
 
@@ -108,11 +114,11 @@
             // update the domains
             now = new Date();
             x.domain([now - (n - 2) * duration, now - duration]);
-            y.domain([0, d3.max(data) + 10]);
+            y.domain([d3.min(data) - 10, d3.max(data) + 10]);
 
 
             // push a new data point onto the back
-            data.push(20 + Math.random() * 100);
+            data.push(60 + Math.random() * 100);
 
             // redraw the line, and slide it to the left
             path.attr("d", line)
